@@ -1,0 +1,84 @@
+{
+    "SeaDashFigures": [
+        {
+            "Country": "VIETNAM",
+            "Project": " UNILEVER",
+            "Date": "20200614",
+            "Attendance": {
+                "Actual": 29,
+                "Target": 29,
+                "Percentage": 100.00
+            },
+            "OutletsCoverage": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "OSA": {
+                "Actual": 6259,
+                "Target": 6845,
+                "Percentage": 91.44
+            },
+            "OOS": {
+                "Actual": 586,
+                "Target": 6845,
+                "Percentage": 8.56
+            },
+            "PromoCompliance": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "NPD": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "POP_Objective": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            }
+        },
+        {
+            "Country": "VIETNAM",
+            "Project": " UNILEVER MTD",
+            "Date": "MTD",
+            "Attendance": {
+                "Actual": 29,
+                "Target": 29,
+                "Percentage": 100.00
+            },
+            "OutletsCoverage": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "OSA": {
+                "Actual": 6259,
+                "Target": 6845,
+                "Percentage": 91.44
+            },
+            "OOS": {
+                "Actual": 586,
+                "Target": 6845,
+                "Percentage": 8.56
+            },
+            "PromoCompliance": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "NPD": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "POP_Objective": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            }
+        }
+    ]
+}

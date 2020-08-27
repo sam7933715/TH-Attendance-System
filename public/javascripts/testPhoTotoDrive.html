@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" name="file" id="input" value="">
+    <div id="fileUrl"></div>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+    <script>
+    (function($) {
+    var appUrl = "https://script.google.com/macros/s/AKfycbx8gZwY_T8-h2tKyquxKmGfug5j_njAe4m9t6MnBnQYee4SbfI/exec", // 網路應用程式網址
+    file, fileReader;
+
+    $("#input").change(function() {
+    file = this.files[0];
+    if (file) {
+    fileReader = new FileReader();
+    fileReader.onload = getFileInfo;
+    fileReader.readAsDataURL(file);
+    // console.log('file'+file) 本段成功
+    }
+    });
+
+    function getFileInfo(evt) {
+    var fileName = file.name,
+    fileType = file.type,
+    dataUrl = evt.target.result,
+    base64Data = dataUrl.split(",")[1];
+    uploadFile(fileName, fileType, base64Data);
+    // console.log('base64Data'+base64Data) 本段成功
+    }
+
+    function uploadFile(fileName, fileType, base64Data) {
+    $.ajax({
+    type: "get",
+    data: {
+    "fileName": fileName,
+    "fileType": fileType,
+    "base64Data": base64Data
+    },
+    url: appUrl,
+    success: function(fileUrl) { // 成功時回傳檔案網址
+    $("#fileUrl").html(fileUrl);
+    },
+    error: function(e) {
+    console.log(JSON.stringify(e));
+    console.log('ajax error');
+    }
+    });
+    }
+    })(jQuery);
+    </script>
+
+
+</body>
+</html>

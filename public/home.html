@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="./images/smollan logo.ico">
+
+  <title>DSFM Check-in</title>
+
+  <!-- Bootstrap core CSS -->
+
+  <link href="./stylesheets/bootstrapcss/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+  <!-- <script src="../modules/echarts.min.js"></script> -->
+  <script src="./javascripts/echarts.min.js"></script>
+  <script src="./javascripts/d3.min.js"></script>
+  <script src="./javascripts/jquery-3.4.1.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVRn7G1vFTSRtIagHFwzTgze5CFD5EhvE"></script>
+
+
+  <!-- <script src="./javascripts/fileupload.js"></script> -->
+  <script src="./javascripts/timeclock.js"></script>
+  <!-- <script src="./javascripts/index.js"></script> -->
+  <!-- <script type="text/javascript" src=".\json\SEA Dash.JSON"></script> -->
+
+  <style>
+    #map {
+      height: "770";
+      width: "550";
+      margin: 5px;
+    }
+
+    input {
+      width: 70%;
+      background-color: #DDDDDD;
+      vertical-align: middle;
+      margin: 10px;
+      margin-left: 10px;
+    }
+
+    form {
+      font-size: 25px;
+      color: white;
+      margin-left: 10px;
+    }
+
+    button {
+      width: 45%;
+      margin: 5px;
+      font-size: 30px;
+    }
+
+    #geocode {
+      font-size: 20px;
+    }
+
+    #showbox {
+      width: 100%;
+      height: 90px;
+      font-size: 80px;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 80px;
+      background-color: gainsboro;
+    }
+
+    img {
+      width: 100%;
+      /* height: 300px; */
+    }
+
+    #formcol {
+      background-color: navy
+    }
+
+    #preview_progressbarTW_img {
+      width: 100%;
+    }
+
+    #geocode {
+      font-size: 20px;
+      color: white;
+      margin-left: 10px;
+      margin-right: 10px;
+      background-color: dodgerblue;
+    }
+  </style>
+
+
+</head>
+
+<body onload="ShowTime()">
+
+  <!-- <script>
+  d3.json('C:\Users\Sam.Shih\Desktop\checkinsys\public\javascripts\token.json',function(error,data){
+    if(error){
+      console.log('error'); 
+    }else{
+      console.log(data);
+    }
+  })
+</script> -->
+
+  <!-- pageloader -->
+  <div id="loader">
+    <div class="loader">
+      <div class="sk-child sk-dot1"></div>
+      <div class="sk-child sk-dot2"></div>
+    </div>
+  </div>
+  <!-- style="width: 100% -->
+
+  <header>
+    <div id="showbox"></div>
+    <div id="formcol">
+      <form action="/somewhere/to/upload" enctype="multipart/form-data">
+        UserID:<input type="text" id='UserID' name="UserID">
+        <br>
+        Photo :<input name="progressbarTW_img" type="file" id="imgInp" capture='camera' accept="image/*"
+          capture="camera" />
+      </form>
+      <div id="geocode"></div>
+      <button onclick="geoFindMe()" type="button" class="btn btn-primary btn-lg" style="margin-bottom: 10px;">Check
+        in</button>
+      <button onclick="geoFindMe()" type="button" class="btn btn-primary btn-lg" style="margin-bottom: 10px;">Check
+        out</button>
+      <img id="preview_progressbarTW_img" src="./images/In it together v2.jpg" />
+    </div>
+  </header>
+
+    <!-- test -->
+    <input type="file" id="input" value="">
+    <div id="fileUrl"></div>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+    <script>
+    (function ($) {
+        var appUrl = "https://script.google.com/macros/s/AKfycbwtoCnkXbrmKgsxSySlDQmrwynJh_ZZCUYSIbfkivBIfYykWLw/exec", // 網路應用程式網址
+          file, fileReader;
+        $("#input").change(function () {
+          file = this.files[0]
+          console.log(file);
+          if (file) {
+            fileReader = new FileReader();
+            fileReader.onload = getFileInfo;
+            fileReader.readAsDataURL(file);
+          }
+        });
+
+        function getFileInfo(evt) {
+          var fileName = file.name,
+            fileType = file.type,
+            dataUrl = evt.target.result,
+            base64Data = dataUrl.split(",")[1];
+          uploadFile(fileName, fileType, base64Data);
+          // console.log(fileName)
+        }
+
+        function uploadFile(fileName, fileType, base64Data) {
+          // console.log(fileName);
+          // console.log(fileType);
+          // console.log(base64Data);
+          $.ajax({
+            type: "get",
+            data: {
+              "fileName": fileName,
+              "fileType": fileType,
+              "base64Data": base64Data
+            },
+            url: appUrl,
+            success: function (fileUrl) { // 成功時回傳檔案網址
+              $("#fileUrl").html(fileUrl);
+            },
+            error: function (e) {
+              console.log(JSON.stringify(e));
+            }
+          });
+        }
+      })(jQuery);
+    </script>
+    <!-- end of test -->
+
+    <!-- <script>
+  // var mydata = JSON.parse(data);
+  // console.log(mydata);
+</script>
+
+
+
+
+  <div class="mt-20"></div>
+
+  <!-- BLOCK advantage -->
+
+  <!-- map beginning -->
+  <!-- <div class="mt-40 mb-20" style="font-size: 20px;font-weight:bold"></div> -->
+
+  <div id="map" style="border: 1px solid #eee; height: 400px; width:100%;"></div>
+
+  <!-- Google map -->
+  <!-- <script src="../modules/googlemap.js"></script> -->
+
+
+  <!-- carousel -->
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block" src="./images/In it together v2.jpg" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block" src="./images/DSFM leading technology v2.png" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block" src="./images/DSFM logo Gray.png" alt="Third slide">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+
+  <!-- JavaScript
+    ================================================== -->
+  <script src="./javascripts/geocoding.js"></script>
+  <script src="./javascripts/photoinsert.js"></script>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <!-- <script src="../modules/Bootstrap/js/"></script>
+    <script src="../modules/Bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../modules/Bootstrap/js/bootstrap.js"></script>
+    <script src="../modules/Bootstrap/js/bootstrap.min.js"></script> -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+{
+    "SeaDashFigures": [
+        {
+            "Country": "APPLE MALAYSIA",
+            "Project": "APPLE MALAYSIA",
+            "Date": "20200612",
+            "Attendance": {
+                "Actual": 2,
+                "Target": 2,
+                "Percentage": 100.00
+            },
+            "OutletsCoverage": {
+                "Actual": 5,
+                "Target": 5,
+                "Percentage": 100.00
+            },
+            "OSA": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "OOS": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "PromoCompliance": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "NPD": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "POP_Objective": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            }
+        },
+        {
+            "Country": "APPLE MALAYSIA MTD",
+            "Project": "APPLE MALAYSIA MTD",
+            "Date": "MTD",
+            "Attendance": {
+                "Actual": 2,
+                "Target": 2,
+                "Percentage": 100.00
+            },
+            "OutletsCoverage": {
+                "Actual": 5,
+                "Target": 5,
+                "Percentage": 100.00
+            },
+            "OSA": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "OOS": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "PromoCompliance": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "NPD": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            },
+            "POP_Objective": {
+                "Actual": 0,
+                "Target": 0,
+                "Percentage": 0.00
+            }
+        }
+    ]
+}
